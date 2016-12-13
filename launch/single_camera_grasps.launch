@@ -1,19 +1,29 @@
+<?xml version="1.0"?>
 <launch>
+	<arg name="cloud_topic"     default ="/camera/depth_registered/points"           />
+	<arg name="cloud_frame"     default ="World"                                     />
+	<arg name="cloud_type"      default ="0"                                         />
+	<arg name="svm_file_name"   default ="$(find agile_grasp)/svm_032015_20_20_same" />
+	<arg name="num_samples"     default ="4000"                                      />
+	<arg name="num_threads"     default ="4"                                         />
+	<arg name="num_clouds"      default ="1"                                         />
+	<arg name="min_inliers"     default ="10"                                        />
+	<arg name="plotting"        default ="2"                                         />
+	<arg name="marker_lifetime" default ="5"                                         />
+
 	<node name="find_grasps" pkg="agile_grasp" type="find_grasps" output="screen">
-  	<param name="cloud_topic" value="/camera/depth_registered/points" />
-    <param name="cloud_frame" value="/camera_rgb_optical_frame" />
-    <param name="cloud_type" value="0" />
-    <param name="svm_file_name" value="$(find agile_grasp)/svm_032015_20_20_same" />
-    <param name="num_samples" value="4000" />
-    <param name="num_threads" value="4" />
-    <param name="num_clouds" value="1" />
+		<param name="cloud_topic"     value ="$(arg cloud_topic)"     />
+		<param name="cloud_frame"     value ="$(arg cloud_frame)"     />
+		<param name="cloud_type"      value ="$(arg cloud_type)"      />
+		<param name="svm_file_name"   value ="$(arg svm_file_name)"   />
+		<param name="num_samples"     value ="$(arg num_samples)"     />
+		<param name="num_threads"     value ="$(arg num_threads)"     />
+		<param name="num_clouds"      value ="$(arg num_clouds)"      />
+		<param name="min_inliers"     value ="$(arg min_inliers)"     />
+		<param name="plotting"        value ="$(arg plotting)"        />
+		<param name="marker_lifetime" value ="$(arg marker_lifetime)" />
+
 		<rosparam param="workspace"> [-10, 10, -10, 10, -10, 10] </rosparam>
-    <rosparam param="camera_pose"> [0, 0.445417, 0.895323, 0.215, 
-              1, 0, 0, -0.015, 
-              0, 0.895323, -0.445417, 0.23, 
-              0, 0, 0, 1] </rosparam>
-    <param name="min_inliers" value="10" />
-    <param name="plotting" value="2" />
-    <param name="marker_lifetime" value="5" />
+		<rosparam param="camera_pose"> [0, 0.445417, 0.895323, 0.215, 1, 0, 0, -0.015, 0, 0.895323, -0.445417, 0.23, 0, 0, 0, 1] </rosparam>
 	</node>
 </launch>
